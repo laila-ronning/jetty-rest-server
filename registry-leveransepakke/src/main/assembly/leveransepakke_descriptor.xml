@@ -1,0 +1,41 @@
+<assembly
+    xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>Leveransepakke</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>src/main/bin</directory>
+            <directoryMode>755</directoryMode>
+            <fileMode>755</fileMode>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/config</directory>
+            <directoryMode>750</directoryMode>
+            <fileMode>750</fileMode>
+            <outputDirectory>config</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>src/main/doc</directory>
+            <directoryMode>750</directoryMode>
+            <fileMode>750</fileMode>
+            <outputDirectory>doc</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>repo</outputDirectory>
+            <directoryMode>755</directoryMode>
+            <fileMode>755</fileMode>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+    
+</assembly>

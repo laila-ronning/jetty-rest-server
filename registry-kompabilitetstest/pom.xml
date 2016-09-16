@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ske.registry</groupId>
+        <artifactId>registry-parent</artifactId>
+        <version>1.1.46-SNAPSHOT</version>
+    </parent>
+
+    <packaging>pom</packaging>
+
+    <artifactId>registry-kompabilitetstest</artifactId>
+
+    <modules>
+        <module>registry-kompabilitetstest-R10</module>
+        <module>registry-kompabilitetstest-R11</module>
+        <module>registry-kompabilitetstest-R12</module>
+        <!--Legg til moduler nye versjoner av klient her-->
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>alleTester</id>
+            <properties>
+                <testkategorier>ske.mag.test.kategorier.Integrasjonstest</testkategorier>
+                <ekskluder-testkategorier />
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>ske.registry</groupId>
+                        <artifactId>registry-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>komptest</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

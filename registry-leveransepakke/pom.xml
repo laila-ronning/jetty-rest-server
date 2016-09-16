@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ske.registry</groupId>
+        <artifactId>registry-parent</artifactId>
+        <version>1.1.46-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>registry-leveransepakke</artifactId>
+
+    <packaging>pom</packaging>
+
+    <profiles>
+        <profile>
+            <id>leveransepakke</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <includeProjectDependencies>true</includeProjectDependencies>
+                            <executableDependency>
+                                <groupId>ske.fastsetting.innsamling</groupId>
+                                <artifactId>mag-felles-konfig</artifactId>
+                            </executableDependency>
+                            <mainClass>mag.felles.konfig.KonfigDokumentasjonGeneratorMainRunner</mainClass>
+                            <arguments>
+                                <!-- Navnet på property fila, som skal finnes på classpath -->
+                                <argument>registry</argument>
+                                <!-- Genereres til src, da denne skal pekes til på wiki. Altså den skal kun sjekkes inn ved 
+                                    hver - leveranse, og fungerer som dok på konfigurasjon. -->
+                                <argument>${basedir}/src/main/doc</argument>
+                                <!-- Navnet på property fila som skal genereres -->
+                                <argument>registry</argument>
+                                <!-- Navnet på klassen som gir konfig nøklene. -->
+                                <argument>ske.registry.module.RegistryModuleKonfig</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${project.parent.groupId}</groupId>
+                                            <artifactId>registry-server</artifactId>
+                                            <version>${project.parent.version}</version>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <includes>**/*.*</includes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>distro-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>src/main/assembly/leveransepakke_descriptor.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>registry-server</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

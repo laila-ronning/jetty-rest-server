@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ske.registry</groupId>
+        <artifactId>registry-kompabilitetstest</artifactId>
+        <version>1.1.46-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>registry-kompabilitetstest-R10</artifactId>
+
+    <properties>
+        <registry-klient.version>1.1.36.1</registry-klient.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ske.registry</groupId>
+            <artifactId>registry-klient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ske.registry</groupId>
+            <artifactId>registry-dto</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>com.sun.jersey.jersey-test-framework</groupId>
+            <artifactId>jersey-test-framework-grizzly2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jukito</groupId>
+            <artifactId>jukito</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ske.registry</groupId>
+                <artifactId>registry-klient</artifactId>
+                <version>${registry-klient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ske.registry</groupId>
+                <artifactId>registry-dto</artifactId>
+                <version>${registry-klient.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
